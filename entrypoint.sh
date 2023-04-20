@@ -17,11 +17,7 @@ rm -f /usr/share/nginx/mikutap.zip
 cloudflared tunnel --url http://localhost:80 --no-autoupdate > argo.log 2>&1 &
 sleep 5 && argo_url=$(cat argo.log | grep -oE "https://.*[a-z]+cloudflare.com" | sed "s#https://##")
 
-vmlink=$(echo -e '\x76\x6d\x65\x73\x73')://$(echo -n "{\"v\":\"2\",\"ps\":\"Argo_xray_vmess\",\"add\":\"$argo_url\",\"port\":\"443\",\"id\":\"8192f723-6b17-4edc-a109-ff21cdec461b\",\"aid\":\"0\",\"net\":\"ws\",\"type\":\"none\",\"host\":\"$argo_url\",\"path\":\"/vmess?ed=2048\",\"tls\":\"tls\"}" | base64 -w 0)
-vllink=$(echo -e '\x76\x6c\x65\x73\x73')"://8192f723-6b17-4edc-a109-ff21cdec461b@"$argo_url":443?encryption=none&security=tls&type=ws&host="$argo_url"&path=/vless?ed=2048#Argo_xray_vless"
-trlink=$(echo -e '\x74\x72\x6f\x6a\x61\x6e')"://8192f723-6b17-4edc-a109-ff21cdec461b@"$argo_url":443?security=tls&type=ws&host="$argo_url"&path=/trojan?ed2048#Argo_xray_trojan"
-
-
+echo qwwer$argo_url
 
 cat > /usr/share/nginx/html/8192f723-6b17-4edc-a109-ff21cdec461b.html<<-EOF
 <!DOCTYPE html>
@@ -46,7 +42,7 @@ cat > /usr/share/nginx/html/8192f723-6b17-4edc-a109-ff21cdec461b.html<<-EOF
 </head>
 <body bgcolor="#FFFFFF" text="#000000">
 
-    <div>$vmlink</div>
+    <div>$argo_url</div>
     
 </body>
 </html>
